@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:techn_app/core/services/firebase_options.dart';
 import 'package:techn_app/flavor.dart';
 
 import 'app.dart';
@@ -41,6 +43,7 @@ Future<void> bootstrap(FlavorType flavor) async {
       DeviceOrientation.portraitDown,
     ]);
     await di.init();
+    await Firebase.initializeApp();
 
     // Initialize Stores
     //await DB.instance.init();

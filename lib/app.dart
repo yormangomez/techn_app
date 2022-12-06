@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:techn_app/features/home/presentation/bloc/home_bloc.dart';
-import 'package:techn_app/features/login/presention/bloc/login_bloc.dart';
+import 'package:techn_app/features/login/presentation/bloc/login_bloc.dart';
 import 'package:techn_app/flavor.dart';
 import 'package:techn_app/navigator.dart';
 

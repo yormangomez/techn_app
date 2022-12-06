@@ -7,7 +7,7 @@ import 'package:techn_app/features/login/data/datasources/login_datasources.dart
 import 'package:techn_app/features/login/data/network/login_datasources_impl.dart';
 import 'package:techn_app/features/login/data/repository/login_repository.dart';
 import 'package:techn_app/features/login/domain/usecases/login_usecases.dart';
-import 'package:techn_app/features/login/presention/bloc/login_bloc.dart';
+import 'package:techn_app/features/login/presentation/bloc/login_bloc.dart';
 
 import 'features/home/data/network/home_datasources_impl.dart';
 

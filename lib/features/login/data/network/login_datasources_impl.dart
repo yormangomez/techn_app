@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:techn_app/core/errors/exceptions.dart';
 import 'package:techn_app/features/login/data/datasources/login_datasources.dart';
 import 'package:http/http.dart' as http;
 
 class LoginDataSourceImpl extends LoginDataSources {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   LoginDataSourceImpl();
 
   @override
