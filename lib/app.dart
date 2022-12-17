@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:techn_app/core/bloc/global_bloc.dart';
 import 'package:techn_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:techn_app/features/login/presentation/bloc/login_bloc.dart';
 import 'package:techn_app/flavor.dart';
@@ -38,6 +39,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       ),
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(create: (context) => di.sl<GlobalBloc>()),
           BlocProvider(create: (context) => di.sl<HomeBloc>()),
           BlocProvider(create: (context) => di.sl<LoginBloc>()),
         ],

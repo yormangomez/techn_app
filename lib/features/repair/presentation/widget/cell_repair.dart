@@ -28,7 +28,7 @@ class _CellRepairState extends State<CellRepair> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(245, 246, 248, 1.0),
+      backgroundColor: const Color.fromRGBO(245, 246, 248, 1.0),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: SingleChildScrollView(
