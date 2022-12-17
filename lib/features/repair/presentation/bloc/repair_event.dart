@@ -6,3 +6,8 @@ abstract class RepairEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class AddRepairEvent extends RepairEvent {
+  final RepairModel? repair;
+  const AddRepairEvent({this.repair});
+}

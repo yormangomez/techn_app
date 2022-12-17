@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:techn_app/core/bloc/global_bloc.dart';
 import 'package:techn_app/features/repair/data/model/repair_model.dart';
+import 'package:techn_app/features/repair/presentation/bloc/repair_bloc.dart';
 import 'package:techn_app/features/repair/presentation/widget/add_phone.dart';
 import 'package:techn_app/navigator.dart';
 
@@ -20,7 +23,6 @@ class _CellRepairState extends State<CellRepair> {
   TextEditingController controllerDescripcion = TextEditingController();
   TextEditingController controllerCedula = TextEditingController();
 
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
   late ImagePicker? picker = ImagePicker();
   XFile? pickedFile;
   bool isPicker = false;
@@ -225,43 +227,48 @@ class _CellRepairState extends State<CellRepair> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 45,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(64, 108, 108, 1.0),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                      onPressed: () async {
-                        setState(() {});
-                        print(pickedFile!.path);
-                        final docUser = firestore.collection('repair').doc();
-                        final data = RepairModel(
-                          brand: controllerMarca.text,
-                          model: controllerCell.text,
-                          description: controllerDescripcion.text,
-                          userId: controllerCedula.text,
-                          location: 'robledo',
-                          phoneProduct: pickedFile?.path,
-                          proceso: Proceso(
-                            espera: true,
-                            procesoReparacion: false,
-                            finalizado: false,
-                            rechazadoEspera: false,
-                            rechazadoCotizacion: false,
-                          ),
-                          feedback: '',
-                        );
+              BlocBuilder<GlobalBloc, GlobalState>(
+                builder: (context, state) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 45,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Color.fromRGBO(64, 108, 108, 1.0),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          onPressed: () {
+                            final data = RepairModel(
+                              brand: controllerMarca.text,
+                              model: controllerCell.text,
+                              description: controllerDescripcion.text,
+                              userId: state.user!.id,
+                              documentoUser: controllerCedula.text,
+                              location: 'robledo',
+                              phoneProduct: pickedFile?.path,
+                              proceso: Proceso(
+                                espera: true,
+                                procesoReparacion: false,
+                                finalizado: false,
+                                rechazadoEspera: false,
+                                rechazadoCotizacion: false,
+                              ),
+                              feedback: '',
+                            );
+                            context
+                                .read<RepairBloc>()
+                                .add(AddRepairEvent(repair: data));
 
-                        await docUser.set(data.toJson());
-                        AppNavigator.pop();
-                        AppNavigator.pop();
-                      },
-                      child: const Text("Solicitar la reparacion")),
-                ),
+                            AppNavigator.pop();
+                            AppNavigator.pop();
+                          },
+                          child: const Text("Solicitar la reparacion")),
+                    ),
+                  );
+                },
               ),
             ],
           ),

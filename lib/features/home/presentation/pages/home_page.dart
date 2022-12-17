@@ -7,9 +7,11 @@ import 'package:techn_app/navigator.dart';
 
 class HomePage extends StatefulWidget {
   final String? numberPhone;
+  final String? idUser;
   const HomePage({
     Key? key,
     this.numberPhone,
+    this.idUser,
   }) : super(key: key);
 
   @override
@@ -47,6 +49,8 @@ class _HomePageState extends State<HomePage> {
   ];
 
   void initState() {
+    context.read<GlobalBloc>().add(UserEvent(idUser: widget.idUser!));
+
     super.initState();
   }
 
@@ -128,7 +132,9 @@ class _HomePageState extends State<HomePage> {
                               BlocBuilder<GlobalBloc, GlobalState>(
                                 builder: (context, state) {
                                   return Text(
-                                    'Hola, ${state.user!.name} ${state.user!.surName}',
+                                    state.user != null
+                                        ? 'Hola, ${state.user!.name} ${state.user!.surName}'
+                                        : 'Hola',
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,

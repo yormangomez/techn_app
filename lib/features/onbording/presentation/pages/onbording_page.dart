@@ -20,10 +20,7 @@ class _OnbordingPageState extends State<OnbordingPage> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: ((context, snapshot) {
           if (snapshot.hasData) {
-            context
-                .read<GlobalBloc>()
-                .add(UserEvent(idUser: snapshot.data!.uid));
-            return HomePage();
+            return HomePage(idUser: snapshot.data!.uid);
           } else {
             return LoginPages();
           }
