@@ -38,9 +38,11 @@ class _HomePageState extends State<HomePage> {
       },
     ),
     HomeItemModel(
-      title: 'agregar',
+      title: 'Mis trabajos',
       iconData: Icons.add,
-      onPressed: () {},
+      onPressed: () {
+        AppNavigator.push(Routes.TECHPROCESSES);
+      },
     ),
   ];
 

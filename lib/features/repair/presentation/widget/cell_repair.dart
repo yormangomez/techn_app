@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:techn_app/core/util/constants.dart';
 import 'package:techn_app/features/repair/data/model/repair_model.dart';
 import 'package:techn_app/features/repair/presentation/widget/add_phone.dart';
 import 'package:techn_app/navigator.dart';
@@ -247,11 +248,8 @@ class _CellRepairState extends State<CellRepair> {
                           location: 'robledo',
                           phoneProduct: pickedFile?.path,
                           proceso: Proceso(
-                            espera: true,
-                            procesoReparacion: false,
-                            finalizado: false,
-                            rechazadoEspera: false,
-                            rechazadoCotizacion: false,
+                            estadoDispositivo: deviceStates["espera"],
+                            descripcion: "",
                           ),
                           feedback: '',
                         );

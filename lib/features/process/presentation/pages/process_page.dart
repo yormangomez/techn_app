@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:techn_app/core/util/constants.dart';
 import 'package:techn_app/features/repair/data/model/repair_model.dart';
 
 class ProcessPage extends StatefulWidget {
@@ -73,68 +74,73 @@ class _ProcessPageState extends State<ProcessPage>
                                     child: ListView.builder(
                                       itemCount: snapshot.data!.length,
                                       itemBuilder: (context, index) {
-                                        return Container(
-                                          width: double.infinity,
-                                          height: 300,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
-                                            color: const Color.fromRGBO(
-                                                245, 246, 248, 1.0),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: const Color(0xFF4056C6)
-                                                    .withOpacity(.15),
-                                                blurRadius: 15,
-                                                offset: const Offset(0, 5),
-                                              )
-                                            ],
-                                          ),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    '${snapshot.data![index].brand}',
-                                                    style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          64, 108, 108, 1.0),
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                        return InkWell(
+                                          onTap: () {
+
+                                          },
+                                          child: Container(
+                                            width: double.infinity,
+                                            height: 300,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              color: const Color.fromRGBO(
+                                                  245, 246, 248, 1.0),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: const Color(0xFF4056C6)
+                                                      .withOpacity(.15),
+                                                  blurRadius: 15,
+                                                  offset: const Offset(0, 5),
+                                                )
+                                              ],
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      '${snapshot.data![index].brand}',
+                                                      style: TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            64, 108, 108, 1.0),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  Text(
-                                                    '${snapshot.data![index].model}',
-                                                    style: TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          64, 108, 108, 1.0),
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                    Text(
+                                                      '${snapshot.data![index].model}',
+                                                      style: TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            64, 108, 108, 1.0),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                     ),
+                                                  ],
+                                                ),
+                                                Text(
+                                                  '${snapshot.data![index].description}',
+                                                  style: TextStyle(
+                                                    color: Color.fromRGBO(
+                                                        64, 108, 108, 1.0),
+                                                    fontWeight: FontWeight.bold,
                                                   ),
-                                                ],
-                                              ),
-                                              Text(
-                                                '${snapshot.data![index].description}',
-                                                style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      64, 108, 108, 1.0),
-                                                  fontWeight: FontWeight.bold,
                                                 ),
-                                              ),
-                                              Text(
-                                                '${snapshot.data![index].proceso!.espera}',
-                                                style: TextStyle(
-                                                  color: Color.fromRGBO(
-                                                      64, 108, 108, 1.0),
-                                                  fontWeight: FontWeight.bold,
+                                                Text(
+                                                  '${snapshot.data![index].proceso!.estadoDispositivo}',
+                                                  style: TextStyle(
+                                                    color: Color.fromRGBO(
+                                                        64, 108, 108, 1.0),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         );
                                       },
@@ -163,20 +169,20 @@ class _ProcessPageState extends State<ProcessPage>
         ));
   }
 
-  /* Stream<List<RepairModel>> readUser() => FirebaseFirestore.instance
+  Stream<List<RepairModel>> readUser() => FirebaseFirestore.instance
       .collection('repair')
       .snapshots()
       .map((snapshot) =>
-          snapshot.docs.map((e) => RepairModel.fromJson(e.data())).toList());*/
+          snapshot.docs.map((e) => RepairModel.fromJson(e.data())).toList());
 
-  Stream<List<RepairModel>> readUser() => FirebaseFirestore.instance
-          .collection('repair')
-          .snapshots()
-          .map((snapshot) {
-        final data =
-            snapshot.docs.map((e) => RepairModel.fromJson(e.data())).toList();
-        return data
-            .where((element) => element.proceso!.espera == true)
-            .toList();
-      });
+  // Stream<List<RepairModel>> readUser() => FirebaseFirestore.instance
+  //         .collection('repair')
+  //         .snapshots()
+  //         .map((snapshot) {
+  //       final data =
+  //           snapshot.docs.map((e) => RepairModel.fromJson(e.data())).toList();
+  //       return data
+  //           .where((element) => element.proceso!.estadoDispositivo == deviceStates["entregado"])
+  //           .toList();
+  //     });
 }

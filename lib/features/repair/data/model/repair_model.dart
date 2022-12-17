@@ -46,6 +46,27 @@ class RepairModel {
 
 class Proceso {
   Proceso({
+    this.estadoDispositivo,
+    this.descripcion,
+  });
+
+  String? estadoDispositivo;
+  String? descripcion;
+
+  factory Proceso.fromJson(Map<String, dynamic> json) => Proceso(
+        estadoDispositivo: json["estadoDispositivo"],
+        descripcion: json["descripcion"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "estadoDispositivo": estadoDispositivo,
+        "descripcion": descripcion,
+      };
+}
+
+/*
+class Proceso {
+  Proceso({
     this.espera,
     this.procesoReparacion,
     this.finalizado,
@@ -75,3 +96,4 @@ class Proceso {
         "rechazadoCotizacion": rechazadoCotizacion,
       };
 }
+ */

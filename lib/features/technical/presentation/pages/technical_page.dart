@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:techn_app/core/util/constants.dart';
 import 'package:techn_app/features/repair/data/model/repair_model.dart';
 
 class TechnicalPage extends StatefulWidget {
@@ -190,7 +191,7 @@ class _TechnicalPageState extends State<TechnicalPage> {
         final data =
             snapshot.docs.map((e) => RepairModel.fromJson(e.data())).toList();
         return data
-            .where((element) => element.proceso!.espera == true)
+            .where((element) => element.proceso!.estadoDispositivo == deviceStates["espera"])
             .toList();
       });
 }

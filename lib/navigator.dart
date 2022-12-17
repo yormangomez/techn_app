@@ -9,6 +9,7 @@ import 'package:techn_app/features/process/presentation/pages/process_page.dart'
 import 'package:techn_app/features/repair/presentation/pages/repair_page.dart';
 import 'package:techn_app/features/starting/presentation/pages/starting.dart';
 import 'package:techn_app/features/technical/presentation/pages/technical_page.dart';
+import 'package:techn_app/features/techprocesses/presentation/pages/techprocesses.dart';
 
 // ignore_for_file: constant_identifier_names
 enum Routes {
@@ -17,6 +18,7 @@ enum Routes {
   REPAIR,
   PROCESS,
   TECHNICAL,
+  TECHPROCESSES,
 }
 
 class _Paths {
@@ -26,6 +28,7 @@ class _Paths {
   static const String repair = '/repair';
   static const String process = '/process';
   static const String technical = '/technical';
+  static const String techprocesses = '/techprocesses';
 
   static const Map<Routes, String> _pathMap = {
     Routes.HOME: _Paths.home,
@@ -33,6 +36,7 @@ class _Paths {
     Routes.REPAIR: _Paths.repair,
     Routes.PROCESS: _Paths.process,
     Routes.TECHNICAL: _Paths.technical,
+    Routes.TECHPROCESSES: _Paths.techprocesses,
   };
 
   static String? of(Routes route) => _pathMap[route];
@@ -73,6 +77,8 @@ class AppNavigator {
         return pageRoute(page: const ProcessPage());
       case _Paths.technical:
         return pageRoute(page: const TechnicalPage());
+      case _Paths.techprocesses:
+        return pageRoute(page: const TechProcessesPage());
       default:
         return pageRoute(page: const Starting());
     }
