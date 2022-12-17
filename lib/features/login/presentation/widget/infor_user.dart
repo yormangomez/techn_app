@@ -20,6 +20,8 @@ class InforUser extends StatefulWidget {
 class _InforUserState extends State<InforUser> {
   TextEditingController controllerName = TextEditingController();
   TextEditingController controllerSurname = TextEditingController();
+  TextEditingController controllerRol = TextEditingController();
+
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -58,6 +60,19 @@ class _InforUserState extends State<InforUser> {
             ),
           ),
           SizedBox(height: 16),
+          TextFormField(
+            controller: controllerRol,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none,
+              ),
+              isDense: true,
+              fillColor: Colors.white,
+              filled: true,
+              hintText: 'rol',
+            ),
+          ),
           SizedBox(
             width: double.infinity,
             height: 45,
@@ -74,6 +89,7 @@ class _InforUserState extends State<InforUser> {
                     'id': widget.credential,
                     "name": controllerName.text,
                     'surName': controllerSurname.text,
+                    "rol": controllerRol.text,
                     'phoneNumber': widget.numberPhone,
                   };
                   Navigator.pushReplacement(
@@ -81,6 +97,7 @@ class _InforUserState extends State<InforUser> {
                       MaterialPageRoute(
                           builder: (context) => HomePage(
                                 numberPhone: widget.numberPhone,
+                                idUser: widget.credential,
                               )));
                   await docUser.set(data);
                 },

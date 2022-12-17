@@ -2,11 +2,11 @@ part of 'home_bloc.dart';
 
 abstract class HomeState extends Equatable {
   final String? message;
-  final dynamic user;
+  final String? userName;
 
   const HomeState({
     this.message,
-    this.user,
+    this.userName,
   });
 
   @override
@@ -25,10 +25,10 @@ class HomeCodeErrorState extends HomeState {
   List<Object?> get props => [];
 }
 
-class UserState extends HomeState {
-  final dynamic newUser;
+class UserNameState extends HomeState {
+  final String? newUserName;
 
-  const UserState({this.newUser}) : super(user: newUser);
+  const UserNameState({this.newUserName}) : super(userName: newUserName);
   @override
   List<Object?> get props => [];
 }

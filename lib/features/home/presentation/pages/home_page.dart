@@ -1,13 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:techn_app/core/bloc/global_bloc.dart';
 import 'package:techn_app/features/home/data/models/home_item_model.dart';
 import 'package:techn_app/navigator.dart';
 
 class HomePage extends StatefulWidget {
   final String? numberPhone;
+  final String? idUser;
   const HomePage({
     Key? key,
     this.numberPhone,
+    this.idUser,
   }) : super(key: key);
 
   @override
@@ -45,6 +49,12 @@ class _HomePageState extends State<HomePage> {
       },
     ),
   ];
+
+  void initState() {
+    context.read<GlobalBloc>().add(UserEvent(idUser: widget.idUser!));
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,23 +120,29 @@ class _HomePageState extends State<HomePage> {
                             vertical: 8,
                           ),
                           child: Row(
-                            children: const [
-                              CircleAvatar(
+                            children: [
+                              const CircleAvatar(
                                 backgroundColor:
                                     Color.fromRGBO(64, 108, 108, 1.0),
                                 backgroundImage: NetworkImage(
                                     "https://gravatar.com/avatar/be640562c459aef01642f3165abb33f8?s=400&d=robohash&r=x"),
                                 radius: 30,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 16,
                               ),
-                              Text(
-                                'Hola, Yorman Gomez',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
+                              BlocBuilder<GlobalBloc, GlobalState>(
+                                builder: (context, state) {
+                                  return Text(
+                                    state.user != null
+                                        ? 'Hola, ${state.user!.name} ${state.user!.surName}'
+                                        : 'Hola',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  );
+                                },
                               )
                             ],
                           ),

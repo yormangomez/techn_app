@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:techn_app/features/home/domain/usecases/home_usecases.dart';
@@ -11,12 +13,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({required this.homeUseCases}) : super(const HomeInitial()) {
     on<HomeEvent>((event, emit) {});
     on<UserPageEvent>((event, emit) async {
-      final resultDb = await homeUseCases.repository.postUser();
+      FirebaseFirestore.instance
+          .collection('user')
+          .doc((FirebaseAuth.instance.currentUser!.displayName))
+          .get()
+          .then((value) => emit(UserNameState(newUserName: value.get('name'))));
 
-      resultDb.fold((dynamic failure) {
+      //final resultDb = await homeUseCases.repository.postUser();
+
+      /* resultDb.fold((dynamic failure) {
         String message = failure.message;
         emit(HomeCodeErrorState(newMessage: message));
-      }, (dynamic user) {});
+      }, (dynamic user) {});*/
     });
   }
 }

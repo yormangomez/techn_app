@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:techn_app/features/login/presentation/widget/verify_number.dart';
+import 'package:techn_app/navigator.dart';
 
 class LoginPages extends StatefulWidget {
   const LoginPages({Key? key}) : super(key: key);

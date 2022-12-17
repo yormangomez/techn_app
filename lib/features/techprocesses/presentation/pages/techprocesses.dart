@@ -145,6 +145,7 @@ class _TechProcessesPageState extends State<TechProcessesPage> {
                                     ),
                                   ),
                                 ),
+
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: SizedBox(

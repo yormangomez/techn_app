@@ -9,6 +9,7 @@ class RepairModel {
     this.phoneProduct,
     this.proceso,
     this.feedback,
+    this.documentoUser,
   });
   String? id;
   String? brand;
@@ -16,6 +17,7 @@ class RepairModel {
   String? location;
   String? description;
   String? userId;
+  String? documentoUser;
   String? phoneProduct;
   Proceso? proceso;
   String? feedback;
@@ -27,6 +29,7 @@ class RepairModel {
         location: json["location"],
         description: json["description"],
         userId: json["userID"],
+        documentoUser: json["documentoUser"],
         phoneProduct: json["phoneProduct"],
         proceso: Proceso.fromJson(json["proceso"]),
         feedback: json["feedback"],
@@ -41,6 +44,7 @@ class RepairModel {
         "phoneProduct": phoneProduct,
         "proceso": proceso?.toJson(),
         "feedback": feedback,
+        "documentoUser": documentoUser,
       };
 }
 
